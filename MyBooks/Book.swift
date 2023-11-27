@@ -5,7 +5,7 @@
 //  Created by Tim Mitra on 2023-11-27.
 //
 
-import Foundation
+import SwiftUI
 import SwiftData
 
 @Model
@@ -37,6 +37,17 @@ class Book {
     self.summary = summary
     self.rating = rating
     self.status = status
+  }
+  
+  var icon: Image { // computed properties are not stored in DB
+    switch status {
+    case .onShelf:
+      Image(systemName: "checkmark.diamond.fill")
+    case .inProgress:
+      Image(systemName: "book.fill")
+    case .completed:
+      Image(systemName: "books.vewtical.fill")
+    }
   }
 }
 
