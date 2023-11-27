@@ -19,13 +19,20 @@ struct MyBooksApp: App {
     }
   
   init() {
-    let config = ModelConfiguration(url: URL.documentsDirectory.appending(path: "MyBooks.store"))
+    let schema = Schema([Book.self])
+    let config = ModelConfiguration("MyBooks", schema: schema)
     do {
-      container = try ModelContainer(for: Book.self, configurations: config)
+      container = try ModelContainer(for: schema, configurations: config)
     } catch {
       fatalError("Could not configure the container")
     }
-    //print(URL.applicationSupportDirectory.path(percentEncoded: false))
-    print(URL.documentsDirectory.path())
+//    let config = ModelConfiguration(url: URL.documentsDirectory.appending(path: "MyBooks.store"))
+//    do {
+//      container = try ModelContainer(for: Book.self, configurations: config)
+//    } catch {
+//      fatalError("Could not configure the container")
+//    }
+    print(URL.applicationSupportDirectory.path(percentEncoded: false))
+    //print(URL.documentsDirectory.path())
   }
 }
