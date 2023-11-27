@@ -46,7 +46,7 @@ class Book {
     case .inProgress:
       Image(systemName: "book.fill")
     case .completed:
-      Image(systemName: "books.vewtical.fill")
+      Image(systemName: "books.vertical.fill")
     }
   }
 }
