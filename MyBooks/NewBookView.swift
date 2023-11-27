@@ -13,27 +13,34 @@ struct NewBookView: View {
   @State var title = ""
   @State var author = ""
   
-    var body: some View {
-      NavigationStack {
-        Form {
-          TextField("Book Title", text: $title)
-          TextField("Author", text: $author)
-          Button ("Create") {
-            let newBook = Book(title: title, author: author)
-            context.insert(newBook)
-            dismiss()
+  var body: some View {
+    NavigationStack {
+      Form {
+        TextField("Book Title", text: $title)
+        TextField("Author", text: $author)
+        Button ("Create") {
+          let newBook = Book(title: title, author: author)
+          context.insert(newBook)
+          dismiss()
+        }
+        .frame(maxWidth: .infinity, alignment: .trailing)
+        .buttonStyle(.borderedProminent)
+        .padding(.vertical)
+        .disabled(title.isEmpty || author.isEmpty)
+        .navigationTitle("New Book")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar{
+          ToolbarItem (placement: .topBarLeading) {
+            Button("Cancel") {
+              dismiss()
+            }
           }
-          .frame(maxWidth: .infinity, alignment: .trailing)
-          .buttonStyle(.borderedProminent)
-          .padding(.vertical)
-          .disabled(title.isEmpty || author.isEmpty)
-          .navigationTitle("New Book")
-          .navigationBarTitleDisplayMode(.inline)
         }
       }
     }
+  }
 }
 
 #Preview {
-    NewBookView()
+  NewBookView()
 }
