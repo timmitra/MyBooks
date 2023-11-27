@@ -13,30 +13,36 @@ struct BookListView: View {
   @State private var createNewBook = false
     var body: some View {
       NavigationStack {
-        List {
-          ForEach(books) { book in
-            NavigationLink{
-              Text(book.title)
-            } label: {
-              HStack(spacing: 10){
-                book.icon
-                VStack (alignment: .leading) {
-                  Text(book.title).font(.title2)
-                  Text(book.author).foregroundStyle(.secondary)
-                  if let rating = book.rating {
-                    HStack {
-                      ForEach(0..<rating, id: \.self) { _ in
-                        Image(systemName: "star.fill").imageScale(.small)
-                          .foregroundColor(.yellow)
+        Group {
+          if books.isEmpty {
+            ContentUnavailableView("Enter your first book", systemImage: "book.fill")
+          } else {
+            List {
+              ForEach(books) { book in
+                NavigationLink{
+                  Text(book.title)
+                } label: {
+                  HStack(spacing: 10){
+                    book.icon
+                    VStack (alignment: .leading) {
+                      Text(book.title).font(.title2)
+                      Text(book.author).foregroundStyle(.secondary)
+                      if let rating = book.rating {
+                        HStack {
+                          ForEach(0..<rating, id: \.self) { _ in
+                            Image(systemName: "star.fill").imageScale(.small)
+                              .foregroundColor(.yellow)
+                          }
+                        }
                       }
                     }
                   }
                 }
               }
             }
+            .listStyle(.plain)
           }
         }
-        .listStyle(.plain)
         .navigationTitle("My Books")
         .toolbar {
           Button {
