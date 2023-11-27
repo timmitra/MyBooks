@@ -6,18 +6,37 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct BookListView: View {
+  @Query(sort: \Book.title) private var books: [Book]
   @State private var createNewBook = false
     var body: some View {
       NavigationStack {
-        VStack {
-          Image(systemName: "globe")
-            .imageScale(.large)
-            .foregroundStyle(.tint)
-          Text("Hello, world!")
+        List {
+          ForEach(books) { book in
+            NavigationLink{
+              Text(book.title)
+            } label: {
+              HStack(spacing: 10){
+                book.icon
+                VStack (alignment: .leading) {
+                  Text(book.title).font(.title2)
+                  Text(book.author).foregroundStyle(.secondary)
+                  if let rating = book.rating {
+                    HStack {
+                      ForEach(0..<rating, id: \.self) { _ in
+                        Image(systemName: "star.fill").imageScale(.small)
+                          .foregroundColor(.yellow)
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
-        .padding()
+        .listStyle(.plain)
         .navigationTitle("My Books")
         .toolbar {
           Button {
@@ -37,4 +56,5 @@ struct BookListView: View {
 
 #Preview {
     BookListView()
+    .modelContainer(for: Book.self, inMemory: true)
 }
