@@ -10,14 +10,22 @@ import SwiftData
 
 @main
 struct MyBooksApp: App {
+  let container: ModelContainer
     var body: some Scene {
         WindowGroup {
             BookListView()
         }
-        .modelContainer(for: Book.self) // the model type to store
+        .modelContainer(container) // the model type to store
     }
   
   init() {
-    print(URL.applicationSupportDirectory.path(percentEncoded: false))
+    let config = ModelConfiguration(url: URL.documentsDirectory.appending(path: "MyBooks.store"))
+    do {
+      container = try ModelContainer(for: Book.self, configurations: config)
+    } catch {
+      fatalError("Could not configure the container")
+    }
+    //print(URL.applicationSupportDirectory.path(percentEncoded: false))
+    print(URL.documentsDirectory.path())
   }
 }
