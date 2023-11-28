@@ -10,7 +10,7 @@ import SwiftData
 
 struct BookListView: View {
   @Environment(\.modelContext) private var context
-  @Query(sort: \Book.title) private var books: [Book]
+  @Query(sort: \Book.author) private var books: [Book]
   @State private var createNewBook = false
     var body: some View {
       NavigationStack {
