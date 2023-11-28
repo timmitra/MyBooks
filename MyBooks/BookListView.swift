@@ -26,7 +26,7 @@ struct BookListView: View {
             Text("Sort By: \(sortOrder.rawValue)").tag(sortOrder)
           }
         }.buttonStyle(.bordered)
-        BookList()
+        BookList(sortOrder: sortOrder)
         .navigationTitle("My Books")
         .toolbar {
           Button {

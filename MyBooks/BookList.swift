@@ -10,7 +10,18 @@ import SwiftData
 
 struct BookList: View {
   @Environment(\.modelContext) private var context
-  @Query(sort: \Book.author) private var books: [Book]
+  @Query private var books: [Book]
+  init(sortOrder: SortOrder) {
+    let sortDescriptors: [SortDescriptor<Book>] = switch sortOrder {
+    case .status:
+      [SortDescriptor(\Book.status), SortDescriptor(\Book.title)]
+    case .title:
+      [SortDescriptor(\Book.title)]
+    case .author:
+      [SortDescriptor(\Book.author)]
+    }
+    _books = Query(sort: sortDescriptors)
+  }
   
     var body: some View {
       Group {
@@ -56,7 +67,7 @@ struct BookList: View {
   let preview = Preview(Book.self)
   preview.addExamples(Book.sampleBooks)
   return NavigationStack {
-    BookList()
+    BookList(sortOrder: .status)
   }
     .modelContainer(preview.container)
 }
