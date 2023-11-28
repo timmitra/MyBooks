@@ -19,6 +19,7 @@ struct EditBookView: View {
   @State private var rating: Int?
   @State private var status = Status.onShelf
   @State private var firstView = true
+  @State private var recommendedBy = ""
   
     var body: some View {
       HStack {
@@ -91,8 +92,13 @@ struct EditBookView: View {
         } label: {
           Text("Author").foregroundStyle(.secondary)
         }
+        LabeledContent {
+          TextField("", text: $recommendedBy)
+        } label: {
+          Text("Recommended By").foregroundStyle(.secondary)
+        }
         Divider()
-        Text("Summary").foregroundStyle(.secondary)
+        Text("Synopsis").foregroundStyle(.secondary)
         TextEditor(text: $synopsis)
           .padding(5)
           .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color (uiColor: .tertiarySystemFill), lineWidth: 2))
@@ -113,6 +119,7 @@ struct EditBookView: View {
             book.dateAdded = dateAdded
             book.dateCompleted = dateCompleted
             book.synopsis = synopsis
+            book.recommendedBy = recommendedBy
             dismiss()
           }
           .buttonStyle(.borderedProminent)
@@ -127,6 +134,7 @@ struct EditBookView: View {
         dateAdded = book.dateAdded
         dateStarted = book.dateStarted
         dateCompleted = book.dateCompleted
+        recommendedBy = book.recommendedBy
       }
       
       // check if any values are changed
@@ -139,6 +147,7 @@ struct EditBookView: View {
         || 	dateAdded != book.dateAdded
         || 	dateStarted != book.dateStarted
         || 	dateCompleted != book.dateCompleted
+        || recommendedBy != book.recommendedBy
       }
     }
 }
