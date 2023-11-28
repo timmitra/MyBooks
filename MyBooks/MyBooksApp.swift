@@ -19,7 +19,7 @@ struct MyBooksApp: App {
     }
   
   init() {
-    let schema = Schema([Book.self])
+    let schema = Schema([Book.self]) // Quote already gets connected
     let config = ModelConfiguration("MyBooks", schema: schema)
     do {
       container = try ModelContainer(for: schema, configurations: config)

@@ -20,7 +20,7 @@ class Book {
   var rating: Int?
   var status: Status.RawValue
   var recommendedBy: String = ""
-
+  var quote: [Quote]? // needs to be Optional for iCloud
   
   init(
     title: String,
