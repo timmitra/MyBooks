@@ -20,6 +20,7 @@ class Book {
   var rating: Int?
   var status: Status.RawValue
   var recommendedBy: String = ""
+  @Relationship(deleteRule: .cascade) // makes the quotes relationship explicit
   var quotes: [Quote]? // needs to be Optional for iCloud
   
   init(
