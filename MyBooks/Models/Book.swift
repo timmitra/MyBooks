@@ -20,8 +20,13 @@ class Book {
   var rating: Int?
   var status: Status.RawValue
   var recommendedBy: String = ""
-  @Relationship(deleteRule: .cascade) // makes the quotes relationship explicit
-  var quotes: [Quote]? // needs to be Optional for iCloud
+  /* @Relationship makes the quotes relationship explicit */
+  /* needs to be Optional for iCloud later */
+  @Relationship(deleteRule: .cascade)
+  var quotes: [Quote]?
+  /* be explicit about the inverse relationship (with default nullify for delete)*/
+  @Relationship(inverse: \Genre.books)
+  var genres: [Genre]?
   
   init(
     title: String,
