@@ -26,6 +26,7 @@ struct MyBooksApp: App {
     } catch {
       fatalError("Could not configure the container")
     }
+    /* specifying the directory */
 //    let config = ModelConfiguration(url: URL.documentsDirectory.appending(path: "MyBooks.store"))
 //    do {
 //      container = try ModelContainer(for: Book.self, configurations: config)
