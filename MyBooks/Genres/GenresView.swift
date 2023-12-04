@@ -53,6 +53,11 @@ struct GenresView: View {
                 Text(genre.name)
               }
             }
+            .onDelete(perform: { indexSet in
+              indexSet .forEach { index in
+                context.delete(genres[index])
+              }
+            })
             LabeledContent {
               Button {
                 newGenre.toggle()
