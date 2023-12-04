@@ -51,6 +51,9 @@ struct BookList: View {
                         }
                       }
                     }
+                    if let genres = book.genres {
+                      GenreStackView(genres: genres)
+                    }
                   }
                 }
               }

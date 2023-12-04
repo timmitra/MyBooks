@@ -103,6 +103,9 @@ struct EditBookView: View {
         TextEditor(text: $synopsis)
           .padding(5)
           .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color (uiColor: .tertiarySystemFill), lineWidth: 2))
+        if let genres = book.genres {
+          GenreStackView(genres: genres)
+        }
         HStack {
           Button("Genres", systemImage: "bookmark.fill") {
             showGenres.toggle()
