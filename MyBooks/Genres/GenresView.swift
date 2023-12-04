@@ -54,7 +54,15 @@ struct GenresView: View {
               }
             }
             .onDelete(perform: { indexSet in
+              // loop through to find the index of the genre
               indexSet .forEach { index in
+              // 2. clear the local genre here in the view
+              if let bookGenres = book.genres,
+                 bookGenres.contains(genres[index]),
+                 let bookGenreIndex = bookGenres.firstIndex(where: { $0.id == genres[index].id }) {
+                book.genres?.remove(at: bookGenreIndex)
+              }
+                // 1. remove the genre in the data store
                 context.delete(genres[index])
               }
             })
