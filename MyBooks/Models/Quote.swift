@@ -11,7 +11,7 @@ import SwiftData
 @Model
 class Quote {
   var creationDate: Date = Date.now
-  var text: String
+  var text: String = ""
   var page: String?
   
   // don't need to init Date since it's set to Date.now
