@@ -27,6 +27,8 @@ class Book {
   /* be explicit about the inverse relationship (with default nullify for delete)*/
   @Relationship(inverse: \Genre.books)
   var genres: [Genre]?
+  @Attribute(.externalStorage)
+  var bookCover: Data?
   
   init(
     title: String,

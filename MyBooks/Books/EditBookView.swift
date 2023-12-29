@@ -169,8 +169,8 @@ struct EditBookView: View {
         }
         .buttonStyle(.bordered)
         .frame(maxWidth: .infinity, alignment: .trailing)
-        .padding(.horizontal)
-      }
+        .padding()
+      } 
       .padding()
       .textFieldStyle(.roundedBorder)
       .navigationTitle(title)
@@ -188,6 +188,7 @@ struct EditBookView: View {
             book.dateCompleted = dateCompleted
             book.synopsis = synopsis
             book.recommendedBy = recommendedBy
+            book.bookCover = selectedBookCoverData
             dismiss()
           }
           .buttonStyle(.borderedProminent)
@@ -202,6 +203,7 @@ struct EditBookView: View {
         dateStarted = book.dateStarted
         dateCompleted = book.dateCompleted
         recommendedBy = book.recommendedBy
+        selectedBookCoverData = book.bookCover
       }
       // task to watch selectedBookCover for changes
       .task(id: selectedBookCover) {
@@ -221,6 +223,7 @@ struct EditBookView: View {
         || 	dateStarted != book.dateStarted
         || 	dateCompleted != book.dateCompleted
         || recommendedBy != book.recommendedBy
+        || selectedBookCoverData != book.bookCover
       }
     }
 }
