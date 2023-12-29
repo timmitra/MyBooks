@@ -107,6 +107,17 @@ struct EditBookView: View {
                 }
               }
               .frame(width: 75, height: 100)
+              .overlay(alignment: .bottomTrailing) {
+                if selectedBookCoverData != nil {
+                  Button {
+                    selectedBookCover = nil
+                    selectedBookCoverData = nil
+                  } label: {
+                    Image(systemName: "x.circle.fill")
+                      .foregroundStyle(.red)
+                  }
+                }
+              }
             }
           VStack {
             LabeledContent {
@@ -191,6 +202,12 @@ struct EditBookView: View {
         dateStarted = book.dateStarted
         dateCompleted = book.dateCompleted
         recommendedBy = book.recommendedBy
+      }
+      // task to watch selectedBookCover for changes
+      .task(id: selectedBookCover) {
+        if let data = try? await selectedBookCover?.loadTransferable(type: Data.self) {
+          selectedBookCoverData = data
+        }
       }
       
       // check if any values are changed
