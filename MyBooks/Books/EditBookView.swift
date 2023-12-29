@@ -17,10 +17,15 @@ struct EditBookView: View {
   @State private var dateCompleted = Date.distantPast
   @State private var synopsis = ""
   @State private var rating: Int?
-  @State private var status = Status.onShelf
-  @State private var firstView = true
+  //@State private var status = Status.onShelf
   @State private var recommendedBy = ""
   @State private var showGenres = false
+  @State private var status: Status
+  
+  init(book: Book) {
+    self.book = book
+    _status = State(initialValue: Status(rawValue: book.status)!)
+  }
   
     var body: some View {
       HStack {
@@ -35,7 +40,12 @@ struct EditBookView: View {
       VStack(alignment: .leading) {
         GroupBox {
           LabeledContent {
-            DatePicker("", selection: $dateAdded, displayedComponents: .date)
+            switch status {
+            case .onShelf:
+              DatePicker("", selection: $dateAdded, displayedComponents: .date)
+            case .inProgress, .completed:
+              DatePicker("", selection: $dateAdded, in: ...dateStarted, displayedComponents: .date)
+            }
           } label: {
             Text("Date Added")
           }
@@ -56,7 +66,6 @@ struct EditBookView: View {
         }
         .foregroundStyle(.secondary)
         .onChange(of: status) { oldValue, newValue in
-          if !firstView {
             if newValue == .onShelf {
               dateStarted = Date.distantPast
               dateCompleted = Date.distantPast
@@ -74,8 +83,6 @@ struct EditBookView: View {
               // completed
               dateCompleted = Date.now
             }
-            firstView = false
-          }
         }
         Divider()
         LabeledContent {
@@ -153,7 +160,6 @@ struct EditBookView: View {
         title = book.title
         author = book.author
         rating = book.rating
-        status = Status(rawValue: book.status)!
         synopsis = book.synopsis
         dateAdded = book.dateAdded
         dateStarted = book.dateStarted

@@ -95,6 +95,7 @@
 				2AA61DD62B1D3D7900C5CD13 /* Accessory Views */,
 				2AA61DCF2B1D2CA700C5CD13 /* Extensions */,
 				2A9D06322B14678D00B04DBB /* Assets.xcassets */,
+				2AAAA59C2B3E6317002B371B /* Previews */,
 				2A9D06342B14678D00B04DBB /* Preview Content */,
 			);
 			path = MyBooks;
@@ -104,9 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				2A9D06352B14678D00B04DBB /* Preview Assets.xcassets */,
-				2AF95AAB2B155FF4001F9520 /* BookSamples.swift */,
-				2AF95AAD2B156178001F9520 /* PreviewContainer.swift */,
-				2AA61DCC2B1D2B3700C5CD13 /* GenreSamples.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -155,6 +153,16 @@
 				2AA61DDC2B1D86BD00C5CD13 /* GenreStackView.swift */,
 			);
 			path = Genres;
+			sourceTree = "<group>";
+		};
+		2AAAA59C2B3E6317002B371B /* Previews */ = {
+			isa = PBXGroup;
+			children = (
+				2AF95AAB2B155FF4001F9520 /* BookSamples.swift */,
+				2AF95AAD2B156178001F9520 /* PreviewContainer.swift */,
+				2AA61DCC2B1D2B3700C5CD13 /* GenreSamples.swift */,
+			);
+			path = Previews;
 			sourceTree = "<group>";
 		};
 		2AF95ADF2B18EE0E001F9520 /* Models */ = {
